@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "path": "proj07todolist"
+    },
+    {
+      "path": "practice7"
+    },
+    {
+      "path": "proj08carlist"
+    },
+    {
+      "path": "proj03carlist"
+    }
+  ],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "practice7"
+  }
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        box-sizing: border-box;
+        border: 1px solid red;
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+        text-align: center;
+        line-height: 100px;
+        position: relative;
+        left: 0px;
+        top: 0px;
+        /* transition: left 1s cubic-bezier(0.67, 0.04, 0.41, 1); */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hello world</h1>
+    <button id="moveBtn">이동</button>
+    <div id="box" class="box">Box</div>
+
+    <script>
+      const moveBtn = document.querySelector("#moveBtn");
+
+      function moveElement(selector, speed, targetX, callback) {
+        const box = document.querySelector(selector);
+        // box 안에 callback 넣기
+        box.callback = callback;
+        let x = 0;
+        let intervalRef = setInterval(function () {
+          x += speed;
+          box.style.left = x + "px";
+          if (x >= targetX) {
+            clearInterval(intervalRef);
+            box.style.left = targetX + "px";
+            box.callback();
+          }
+        }, 20);
+      }
+
+      moveBtn.addEventListener("click", function () {
+        // moveElement에서 callback함수 사용
+        moveElement("#box", 5, 200, function () {
+          //   alert("동작 완료");
+          //   box.style.backgroundColor = "orange";
+          //   console.dir(this.document.body.childNodes[5]);
+          this.style.backgroundColor = "orange";
+        });
+      });
+    </script>
+  </body>
+</html>

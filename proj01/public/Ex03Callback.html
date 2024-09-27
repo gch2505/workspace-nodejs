@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #box {
+        border: 1px solid red;
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+        text-align: center;
+        line-height: 100px;
+        position: relative;
+        left: 0px;
+        top: 0px;
+        /* transition: left 1s cubic-bezier(0.67, 0.04, 0.41, 1); */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hello world</h1>
+    <button id="moveBtn">이동</button>
+    <div id="box">Box</div>
+
+    <script>
+      const moveBtn = document.querySelector("#moveBtn");
+      const box = document.querySelector("#box");
+
+      // 변수 선언 및 초기화
+      // var는 window의 엠버속성으로 등록, let은 지역속성
+      var x = 0;
+      console.dir(window);
+
+      moveBtn.addEventListener("click", function () {
+        x += 30;
+        box.style.left = x + "px";
+      });
+    </script>
+  </body>
+</html>

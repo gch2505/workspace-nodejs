@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>햄버거하우스 게임 만들기</title>
+    <style>
+      #box {
+        border: 2px solid #999;
+        width: 300px;
+        height: 300px;
+      }
+      .cellBox {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #111;
+        overflow: hidden;
+        position: relative;
+        top: 0;
+        left: 0;
+        display: block;
+        box-sizing: border-box;
+        float: left;
+      }
+      .cellBox ul {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 1px solid #550000;
+        margin: 0;
+        padding: 0;
+      }
+      .cellBox ul li {
+        border: 1px solid #775500;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        list-style: none;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>햄버거하우스 게임</h1>
+    <button id="startBtn">Start</button>
+    <button id="stopBtn">Stop</button>
+    <hr />
+    <div id="box"></div>
+
+    <script>
+      function Box() {}
+      Box.prototype.init = function (text) {
+        this.cellBox = document.createElement("div");
+        this.elementUl = document.createElement("ul");
+        for (var i = 0; i < 10; i++) {
+          this.elementLi = document.createElement("li");
+          this.elementLi.innerText = i;
+          this.elementUl.appendChild(this.elementLi);
+        }
+        this.cellBox.appendChild(this.elementUl);
+        this.cellBox.setAttribute("class", "cellBox");
+        return this.cellBox;
+      };
+      Box.prototype.start = function (speed) {
+        this.y = 0;
+        this.intervalRef = setInterval(() => {
+          this.y -= 10;
+          this.elementUl.style.top = this.y + "px";
+          if (this.y <= -900) {
+            this.y = 0;
+          }
+        }, speed);
+      };
+      Box.prototype.stop = function () {
+        clearInterval(this.intervalRef);
+        this.elementUl.style.top = Math.floor(this.y / 100) * 100 + "px";
+      };
+
+      const divBox = document.querySelector("#box");
+      const boxArr = [];
+      for (var i = 0; i < 9; i++) {
+        boxArr.push(new Box());
+        const newBox = boxArr[i].init();
+        divBox.appendChild(newBox);
+      }
+
+      const startBtn = document.querySelector("#startBtn");
+      const stopBtn = document.querySelector("#stopBtn");
+      startBtn.addEventListener("click", function (event) {
+        boxArr.forEach(function (box) {
+          box.start(Math.floor(5 + Math.random() * 20));
+        });
+      });
+      stopBtn.addEventListener("click", function (event) {
+        boxArr.forEach(function (box) {
+          box.stop();
+        });
+      });
+    </script>
+  </body>
+</html>

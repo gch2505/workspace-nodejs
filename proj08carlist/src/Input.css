@@ -1,0 +1,10 @@
+div.input-group{
+    /* background-color:yellow; */
+}
+.input-group-prepend > span {
+    width :120px;
+}
+
+button.btn-primary{
+    /* padding: 13px; */
+}
